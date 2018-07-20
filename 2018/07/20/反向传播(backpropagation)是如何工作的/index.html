@@ -81,30 +81,30 @@
 
 <meta name="description" content="反向传播(backpropagation)是如何工作的反向传播算法最早于上世纪70年代被提出，但是直到1986年，由David Rumelhart, Geoffrey Hinton, 和Ronald Williams联合发表了一篇著名论文之后，人们才完全认识到这个算法的重要性。这篇论文介绍了几种神经网络，在这些网络的学习中，反向传播算法比之前提出的方法都要快。这使得以前用神经网络不可解的一些问题，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="八号风球的博客">
-<meta property="og:url" content="http://yoursite.com/2018/03/13/反向传播(backpropagation)是如何工作的/index.html">
+<meta property="og:title" content="反向传播">
+<meta property="og:url" content="http://yoursite.com/2018/07/20/反向传播(backpropagation)是如何工作的/index.html">
 <meta property="og:site_name" content="八号风球的博客">
 <meta property="og:description" content="反向传播(backpropagation)是如何工作的反向传播算法最早于上世纪70年代被提出，但是直到1986年，由David Rumelhart, Geoffrey Hinton, 和Ronald Williams联合发表了一篇著名论文之后，人们才完全认识到这个算法的重要性。这篇论文介绍了几种神经网络，在这些网络的学习中，反向传播算法比之前提出的方法都要快。这使得以前用神经网络不可解的一些问题，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/03/13/反向传播(backpropagation)是如何工作的/media/15205765858545/15205777820744.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/13/反向传播(backpropagation)是如何工作的/media/15205765858545/15205799489526.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/13/反向传播(backpropagation)是如何工作的/media/15205765858545/15205780111447.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/13/反向传播(backpropagation)是如何工作的/media/15205765858545/15209122645147.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/13/反向传播(backpropagation)是如何工作的/media/15205765858545/15209122861731.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/13/反向传播(backpropagation)是如何工作的/media/15205765858545/15209123666653.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/13/反向传播(backpropagation)是如何工作的/media/15205765858545/15209123798567.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/03/13/反向传播(backpropagation)是如何工作的/media/15205765858545/15205806226972.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/13/反向传播(backpropagation)是如何工作的/media/15205765858545/15205816370977.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/13/反向传播(backpropagation)是如何工作的/media/15205765858545/15205816703098.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/13/反向传播(backpropagation)是如何工作的/media/15205765858545/15205816827768.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/13/反向传播(backpropagation)是如何工作的/media/15205765858545/15205816899701.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/13/反向传播(backpropagation)是如何工作的/media/15205765858545/15205817090916.png">
-<meta property="og:image" content="http://yoursite.com/2018/03/13/反向传播(backpropagation)是如何工作的/media/15205765858545/15205817218691.png">
-<meta property="og:updated_time" content="2018-03-13T03:40:03.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/反向传播(backpropagation)是如何工作的/media/15205765858545/15205777820744.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/反向传播(backpropagation)是如何工作的/media/15205765858545/15205799489526.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/反向传播(backpropagation)是如何工作的/media/15205765858545/15205780111447.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/反向传播(backpropagation)是如何工作的/media/15205765858545/15209122645147.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/反向传播(backpropagation)是如何工作的/media/15205765858545/15209122861731.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/反向传播(backpropagation)是如何工作的/media/15205765858545/15209123666653.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/反向传播(backpropagation)是如何工作的/media/15205765858545/15209123798567.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/反向传播(backpropagation)是如何工作的/media/15205765858545/15205806226972.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/反向传播(backpropagation)是如何工作的/media/15205765858545/15205816370977.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/反向传播(backpropagation)是如何工作的/media/15205765858545/15205816703098.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/反向传播(backpropagation)是如何工作的/media/15205765858545/15205816827768.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/反向传播(backpropagation)是如何工作的/media/15205765858545/15205816899701.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/反向传播(backpropagation)是如何工作的/media/15205765858545/15205817090916.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/反向传播(backpropagation)是如何工作的/media/15205765858545/15205817218691.png">
+<meta property="og:updated_time" content="2018-07-20T08:53:23.636Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="八号风球的博客">
+<meta name="twitter:title" content="反向传播">
 <meta name="twitter:description" content="反向传播(backpropagation)是如何工作的反向传播算法最早于上世纪70年代被提出，但是直到1986年，由David Rumelhart, Geoffrey Hinton, 和Ronald Williams联合发表了一篇著名论文之后，人们才完全认识到这个算法的重要性。这篇论文介绍了几种神经网络，在这些网络的学习中，反向传播算法比之前提出的方法都要快。这使得以前用神经网络不可解的一些问题，">
-<meta name="twitter:image" content="http://yoursite.com/2018/03/13/反向传播(backpropagation)是如何工作的/media/15205765858545/15205777820744.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/20/反向传播(backpropagation)是如何工作的/media/15205765858545/15205777820744.png">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/13/反向传播(backpropagation)是如何工作的/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/20/反向传播(backpropagation)是如何工作的/"/>
 
 
 
 
 
-  <title> | 八号风球的博客</title>
+  <title>反向传播 | 八号风球的博客</title>
   
 
 
@@ -247,7 +247,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/13/反向传播(backpropagation)是如何工作的/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/反向传播(backpropagation)是如何工作的/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="E.Wind">
@@ -264,7 +264,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">反向传播</h1>
         
 
         <div class="post-meta">
@@ -276,8 +276,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-13T11:40:03+08:00">
-                2018-03-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-20T16:45:05+08:00">
+                2018-07-20
               </time>
             
 
