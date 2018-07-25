@@ -394,11 +394,9 @@
 <p>栈的基本概念和性质,栈ADT及其顺序,链接实现;栈的应用;栈与递归;</p>
 <p>队列的基本概念和性质,队列ADT及其顺序,链接实现;队列的应用;</p>
 <p>向量基本概念和性质;向量ADT及其数组、链接实现;</p>
-<h2 id="二、树"><a href="#二、树" class="headerlink" title="二、树"></a>二、树</h2><p>内容: 树的基本概念和术语;树的前序,中序,后序,层次序遍历;</p>
-<p>二叉树及其性质;普通树与二叉树的转换;</p>
-<p>树的存储结构,标准形式;完全树(complete tree)的数组形式存储;</p>
-<p>树的应用,Huffman树的定义与应用;</p>
-<h2 id="三、查找-search"><a href="#三、查找-search" class="headerlink" title="三、查找(search)"></a>三、查找(search)</h2><p>内容: 查找的基本概念;对线性关系结构的查找,顺序查找,二分查找;</p>
+<h2 id="二、树"><a href="#二、树" class="headerlink" title="二、树"></a>二、树</h2><h3 id="树的基本概念和术语"><a href="#树的基本概念和术语" class="headerlink" title="树的基本概念和术语"></a>树的基本概念和术语</h3><p><img src="http://imageqiniu.8hfq.com/15324886413081.jpg" alt=""><br>树是一种非线性的数据结构<br>他是若干结点（A,B,C…等都是结点）的集合，是由唯一的根A和若干颗互不相交的子树组成的。其中每一棵子树又是一棵树，也是由唯一的根结点和若干颗互不相交的子树组成的。<br>由此可知，树的定义是递归的。</p>
+<p>树的结点包含一个数据元素以及若干指向其子树的分支。<br>结点拥有的子树数目称为结点的度。<br>度为0的结点称为叶结点或终端结点；度不为0的结点称为非终端结点或分支结点。<br>除根结点之外，分支结点也称为内部结点。<br>树的度是树内各结点的度的最大值。<br>结点的子树的根称为该结点的孩子。相应地，该结点称为孩子的双亲。<br>同一个双亲的孩子之间互称为兄弟（Sibling）。<br>结点的祖先(Ancestor)是从根到该结点所经分支上的所有结点。<br>结点的层次：结点的层次从根开始定义起，根为第一层，根的孩子为第二层。若某结点在第L层，则其子树的根就在第L+1层。其双亲在同一层的结点互为堂兄弟。<br>树中结点的最大层次称为树的深度或高度(Depth)。<br>如果将树中结点的各子树看成从左至右是有次序的，不能互换的，则称该树为有序树，否则称为无序树。<br>森林是m(m&gt;=0)棵互不相交的树的集合。对树中每个结点而言，其子树的集合即为森林。</p>
+<h3 id="树的前序-中序-后序-层次序遍历"><a href="#树的前序-中序-后序-层次序遍历" class="headerlink" title="树的前序,中序,后序,层次序遍历;"></a>树的前序,中序,后序,层次序遍历;</h3><h3 id="二叉树及其性质"><a href="#二叉树及其性质" class="headerlink" title="二叉树及其性质"></a>二叉树及其性质</h3><h3 id="普通树与二叉树的转换"><a href="#普通树与二叉树的转换" class="headerlink" title="普通树与二叉树的转换;"></a>普通树与二叉树的转换;</h3><h3 id="树的存储结构-标准形式"><a href="#树的存储结构-标准形式" class="headerlink" title="树的存储结构,标准形式"></a>树的存储结构,标准形式</h3><h3 id="完全树-complete-tree-的数组形式存储"><a href="#完全树-complete-tree-的数组形式存储" class="headerlink" title="完全树(complete tree)的数组形式存储;"></a>完全树(complete tree)的数组形式存储;</h3><h3 id="树的应用"><a href="#树的应用" class="headerlink" title="树的应用"></a>树的应用</h3><h3 id="Huffman树的定义与应用"><a href="#Huffman树的定义与应用" class="headerlink" title="Huffman树的定义与应用;"></a>Huffman树的定义与应用;</h3><h2 id="三、查找-search"><a href="#三、查找-search" class="headerlink" title="三、查找(search)"></a>三、查找(search)</h2><p>内容: 查找的基本概念;对线性关系结构的查找,顺序查找,二分查找;</p>
 <pre><code>Hash查找法,常见的Hash函数(直接定址法,随机数法),hash冲突的概念, 解决冲突的方法(开散列方法/拉链法,闭散列方法/开址定址法),二次聚集现象;
 
 BST树定义,性质,ADT及其实现,BST树查找,插入,删除算法;
@@ -908,7 +906,7 @@ BST树定义,性质,ADT及其实现,BST树查找,插入,删除算法;
 
 
 
-  <div class="theme-info">备案号 &mdash; <a class="theme-link" target="_blank" href="http://www.miitbeian.gov.cn/state/outPortal/loginPortal.action">鄂ICP备18000740号</a> 主题NexT</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
 
 
 
