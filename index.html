@@ -423,7 +423,32 @@
 <p>对于Huffman树的构建过程为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">int huffman_tree_create(huffman_node *&amp;root, map&lt;char, int&gt; &amp;word)&#123;</span><br><span class="line">        char line[MAX_LINE];</span><br><span class="line">        vector&lt;huffman_node *&gt; huffman_tree_node;</span><br><span class="line"></span><br><span class="line">        map&lt;char, int&gt;::iterator it_t;</span><br><span class="line">        for (it_t = word.begin(); it_t != word.end(); it_t++)&#123;</span><br><span class="line">                // 为每一个节点申请空间</span><br><span class="line">                huffman_node *node = (huffman_node *)malloc(sizeof(huffman_node));</span><br><span class="line">                node-&gt;c = it_t-&gt;first;</span><br><span class="line">                node-&gt;weight = it_t-&gt;second;</span><br><span class="line">                node-&gt;left = NULL;</span><br><span class="line">                node-&gt;right = NULL;</span><br><span class="line">                huffman_tree_node.push_back(node);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        // 开始从叶节点开始构建Huffman树</span><br><span class="line">        while (huffman_tree_node.size() &gt; 0)&#123;</span><br><span class="line">                // 按照weight升序排序</span><br><span class="line">                sort(huffman_tree_node.begin(), huffman_tree_node.end(), sort_by_weight);</span><br><span class="line">                // 取出前两个节点</span><br><span class="line">                if (huffman_tree_node.size() == 1)&#123;// 只有一个根结点</span><br><span class="line">                        root = huffman_tree_node[0];</span><br><span class="line">                        huffman_tree_node.erase(huffman_tree_node.begin());</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                        // 取出前两个</span><br><span class="line">                        huffman_node *node_1 = huffman_tree_node[0];</span><br><span class="line">                        huffman_node *node_2 = huffman_tree_node[1];</span><br><span class="line">                        // 删除</span><br><span class="line">                        huffman_tree_node.erase(huffman_tree_node.begin());</span><br><span class="line">                        huffman_tree_node.erase(huffman_tree_node.begin());</span><br><span class="line">                        // 生成新的节点</span><br><span class="line">                        huffman_node *node = (huffman_node *)malloc(sizeof(huffman_node));</span><br><span class="line">                        node-&gt;weight = node_1-&gt;weight + node_2-&gt;weight;</span><br><span class="line">                        (node_1-&gt;weight &lt; node_2-&gt;weight)?(node-&gt;left=node_1,node-&gt;right=node_2):(node-&gt;left=node_2,node-&gt;right=node_1);</span><br><span class="line">                        huffman_tree_node.push_back(node);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="Huffman树的特点"><a href="#Huffman树的特点" class="headerlink" title="Huffman树的特点"></a>Huffman树的特点</h4><p>1）权值越大的结点，距离根结点越近。<br>2）树中没有度为1的结点，这类树又叫做正则（严格）二叉树。<br>3）树的带权路径长度最短</p>
-<h4 id="Huffman编码"><a href="#Huffman编码" class="headerlink" title="Huffman编码"></a>Huffman编码</h4><h2 id="三、查找-search"><a href="#三、查找-search" class="headerlink" title="三、查找(search)"></a>三、查找(search)</h2><p>内容: 查找的基本概念;对线性关系结构的查找,顺序查找,二分查找;</p>
+<h4 id="Huffman编码"><a href="#Huffman编码" class="headerlink" title="Huffman编码"></a>Huffman编码</h4><p>常见的.zip压缩文件和.jpeg图片文件的底层技术都用到了赫夫曼编码。<br>例如字符串S=AAABBACCCDEEA<br><code>| A | B | C | D | E |
+| :-: | :-: | :-: | :-: | :-: |
+| 5次 | 2次 | 3次 | 1次 | 2次 |</code><br>以出现的次数为权值，构建一个赫夫曼树，对每个结点的左右分支进行编号，左0右1，从根到每个结点的路径的数字序列即为每个字符的编码，对A~E的赫夫曼编码规则</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">A</th>
+<th style="text-align:center">B</th>
+<th style="text-align:center">C</th>
+<th style="text-align:center">D</th>
+<th style="text-align:center">E</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">110</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">1110</td>
+<td style="text-align:center">1111</td>
+</tr>
+</tbody>
+</table>
+<p>则H(S)=00011011001010101110111111110<br>上述有赫夫曼树导出每个字符的编码，进而得到整个字符串的编码的过程称为赫夫曼编码。<br>在前缀码中，任一字符的编码串都不是另一字符编码串的前缀，赫夫曼编码产生的是最短前缀码。</p>
+<h4 id="赫夫曼n叉树"><a href="#赫夫曼n叉树" class="headerlink" title="赫夫曼n叉树"></a>赫夫曼n叉树</h4><p>赫夫曼二叉树是赫夫曼n叉树的一种特例，当对于结点数目大于等于2的待处理序列，都可以构造赫夫曼二叉树，但却不一定能构建赫夫曼n叉树，但无法构建时。需要补上权值为0的结点让整个序列凑成可以构造赫夫曼n叉树的序列。</p>
+<h2 id="三、查找-search"><a href="#三、查找-search" class="headerlink" title="三、查找(search)"></a>三、查找(search)</h2><p>内容: 查找的基本概念;对线性关系结构的查找,顺序查找,二分查找;</p>
 <pre><code>Hash查找法,常见的Hash函数(直接定址法,随机数法),hash冲突的概念, 解决冲突的方法(开散列方法/拉链法,闭散列方法/开址定址法),二次聚集现象;
 
 BST树定义,性质,ADT及其实现,BST树查找,插入,删除算法;
