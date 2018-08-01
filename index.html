@@ -95,7 +95,7 @@
     root: '/',
     scheme: 'Pisces',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -140,7 +140,7 @@
     
   
 
-  <div class="container sidebar-position-left 
+  <div class="container sidebar-position-right 
   page-home">
     <div class="headband"></div>
 
@@ -298,7 +298,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="E.Wind">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -513,7 +513,11 @@
 <p>MatrixUDG是邻接矩阵对应的结构体。mVexs用于保存顶点，mEdgNum用于保存边数，mMatrix则是用于保存矩阵信息的二维数组。例如，mMatrix[i][j]=1，则表示”顶点i(即mVexs[i])”和”顶点j(即mVexs[j])”是邻接点；mMatrix[i][j]=0，则表示它们不是邻接点。</p>
 <h5 id="克鲁斯卡尔算法代码"><a href="#克鲁斯卡尔算法代码" class="headerlink" title="克鲁斯卡尔算法代码"></a>克鲁斯卡尔算法代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * 克鲁斯卡尔（Kruskal)最小生成树</span><br><span class="line"> */</span><br><span class="line">public void kruskal() &#123;</span><br><span class="line">    int index = 0;                      // rets数组的索引</span><br><span class="line">    int[] vends = new int[mEdgNum];     // 用于保存&quot;已有最小生成树&quot;中每个顶点在该最小树中的终点。</span><br><span class="line">    EData[] rets = new EData[mEdgNum];  // 结果数组，保存kruskal最小生成树的边</span><br><span class="line">    EData[] edges;                      // 图对应的所有边</span><br><span class="line"></span><br><span class="line">    // 获取&quot;图中所有的边&quot;</span><br><span class="line">    edges = getEdges();</span><br><span class="line">    // 将边按照&quot;权&quot;的大小进行排序(从小到大)</span><br><span class="line">    sortEdges(edges, mEdgNum);</span><br><span class="line"></span><br><span class="line">    for (int i=0; i&lt;mEdgNum; i++) &#123;</span><br><span class="line">        int p1 = getPosition(edges[i].start);      // 获取第i条边的&quot;起点&quot;的序号</span><br><span class="line">        int p2 = getPosition(edges[i].end);        // 获取第i条边的&quot;终点&quot;的序号</span><br><span class="line"></span><br><span class="line">        int m = getEnd(vends, p1);                 // 获取p1在&quot;已有的最小生成树&quot;中的终点</span><br><span class="line">        int n = getEnd(vends, p2);                 // 获取p2在&quot;已有的最小生成树&quot;中的终点</span><br><span class="line">        // 如果m!=n，意味着&quot;边i&quot;与&quot;已经添加到最小生成树中的顶点&quot;没有形成环路</span><br><span class="line">        if (m != n) &#123;</span><br><span class="line">            vends[m] = n;                       // 设置m在&quot;已有的最小生成树&quot;中的终点为n</span><br><span class="line">            rets[index++] = edges[i];           // 保存结果</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 统计并打印&quot;kruskal最小生成树&quot;的信息</span><br><span class="line">    int length = 0;</span><br><span class="line">    for (int i = 0; i &lt; index; i++)</span><br><span class="line">        length += rets[i].weight;</span><br><span class="line">    System.out.printf(&quot;Kruskal=%d: &quot;, length);</span><br><span class="line">    for (int i = 0; i &lt; index; i++)</span><br><span class="line">        System.out.printf(&quot;(%c,%c) &quot;, rets[i].start, rets[i].end);</span><br><span class="line">    System.out.printf(&quot;\n&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h5 id="克鲁斯卡尔算法时间复杂度分析"><a href="#克鲁斯卡尔算法时间复杂度分析" class="headerlink" title="克鲁斯卡尔算法时间复杂度分析"></a>克鲁斯卡尔算法时间复杂度分析</h5><p>算法时间花费主要在函数sort()和单层循环上。循环是线性级的，可以认为算法时间主要花费在sort()上，因为排序算法时间复杂度一般大于常量级，因此，克鲁斯卡尔算法的时间复杂度主要由选取的排序算法决定，排序算法所处理的数据的规模由图的边e决定，与顶点无关，因此克鲁斯卡尔算法适用于稀疏图。</p>
-<p>最短路径问题,广度优先遍历算法,Dijkstra算法,Floyd算法;拓扑排序</p>
+<h3 id="最短路径"><a href="#最短路径" class="headerlink" title="最短路径"></a>最短路径</h3><h4 id="迪杰斯特拉算法（Dijkstra）"><a href="#迪杰斯特拉算法（Dijkstra）" class="headerlink" title="迪杰斯特拉算法（Dijkstra）"></a>迪杰斯特拉算法（Dijkstra）</h4><p>迪杰斯特拉(Dijkstra)算法是典型最短路径算法，用于计算一个节点到其他节点的最短路径。<br>它的主要特点是以起始点为中心向外层层扩展(广度优先搜索思想)，直到扩展到终点为止。</p>
+<h5 id="迪杰特斯拉算法基本思想"><a href="#迪杰特斯拉算法基本思想" class="headerlink" title="迪杰特斯拉算法基本思想"></a>迪杰特斯拉算法基本思想</h5><p>通过Dijkstra计算图G中的最短路径时，需要指定起点s(即从顶点s开始计算)。此外，引进两个集合S和U。S的作用是记录已求出最短路径的顶点(以及相应的最短路径长度)，而U则是记录还未求出最短路径的顶点(以及该顶点到起点s的距离)。初始时，S中只有起点s；U中是除s之外的顶点，并且U中顶点的路径是”起点s到该顶点的路径”。然后，从U中找出路径最短的顶点，并将其加入到S中；接着，更新U中的顶点和顶点对应的路径。 然后，再从U中找出路径最短的顶点，并将其加入到S中；接着，更新U中的顶点和顶点对应的路径。 … 重复该操作，直到遍历完所有顶点。</p>
+<h5 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h5><p>(1) 初始时，S只包含起点s；U包含除s外的其他顶点，且U中顶点的距离为”起点s到该顶点的距离”[例如，U中顶点v的距离为(s,v)的长度，然后s和v不相邻，则v的距离为∞]。<br>(2) 从U中选出”距离最短的顶点k”，并将顶点k加入到S中；同时，从U中移除顶点k。<br>(3) 更新U中各个顶点到起点s的距离。之所以更新U中顶点的距离，是由于上一步中确定了k是求出最短路径的顶点，从而可以利用k来更新其它顶点的距离；例如，(s,v)的距离可能大于(s,k)+(k,v)的距离。<br>(4) 重复步骤(2)和(3)，直到遍历完所有顶点。<br>单纯的看上面的理论可能比较难以理解，下面通过实例来对该算法进行说明。<br><img src="http://imageqiniu.8hfq.com/15330917841894.jpg" alt=""></p>
+<p><img src="http://imageqiniu.8hfq.com/15330917268661.jpg" alt=""></p>
+<p>广度优先遍历算法,Dijkstra算法,Floyd算法;拓扑排序</p>
 <h1 id="第二部分-计算机系统基础"><a href="#第二部分-计算机系统基础" class="headerlink" title="第二部分 计算机系统基础"></a>第二部分 计算机系统基础</h1><p>考试题型：问答、分析、编程</p>
 <p>总分：40分</p>
 <h2 id="一-、处理器体系结构"><a href="#一-、处理器体系结构" class="headerlink" title="一 、处理器体系结构"></a>一 、处理器体系结构</h2><p>内容：CPU中的时序电路、单周期处理器的设计、流水线处理器的基本原理、Data Hazard的处理、流水线设计中的其他问题</p>
@@ -605,7 +609,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="E.Wind">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -767,7 +771,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="E.Wind">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -936,6 +940,10 @@
       <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="E.Wind" />
             
               <p class="site-author-name" itemprop="name">E.Wind</p>
               <p class="site-description motion-element" itemprop="description"></p>
