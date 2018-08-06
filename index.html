@@ -471,7 +471,22 @@
 <h3 id="对线性关系结构的查找"><a href="#对线性关系结构的查找" class="headerlink" title="对线性关系结构的查找"></a>对线性关系结构的查找</h3><h4 id="顺序查找"><a href="#顺序查找" class="headerlink" title="顺序查找"></a>顺序查找</h4><p>基本思路：从表的一端开始，顺序扫描线性表，一次将扫描到的关键字和给定的K值比较。<br>顺序查找法对于顺序表和链表都是适用的，对于顺序表，可以通过数组下标递增来顺序扫描数组中的各个元素；对于链表，则可以通过表结点指针反复执行p=p-&gt;next来扫描表中的各个元素。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int Search(int a[], int n ,int t)&#123;</span><br><span class="line">    int i;</span><br><span class="line">    for (int i = 1; i &lt;=n; ++i) &#123;</span><br><span class="line">        if(a[i]==k)</span><br><span class="line">            return i;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>时间复杂度为0(n)</p>
-<h4 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h4><p>  Hash查找法,常见的Hash函数(直接定址法,随机数法),hash冲突的概念, 解决冲突的方法(开散列方法/拉链法,闭散列方法/开址定址法),二次聚集现象;</p>
+<h4 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h4><p>基本思路：<br>① 首先确定整个查找区间的中间位置 mid = （ left + right ）/ 2<br>② 用待查关键字值与中间位置的关键字值进行比较；<br>　 若相等，则查找成功<br>　 若大于，则在后（右）半个区域继续进行折半查找<br>　 若小于，则在前（左）半个区域继续进行折半查找<br>③ 对确定的缩小区域再按折半公式，重复上述步骤。</p>
+<p>二分查找必须要求<br>1.存储在数组中<br>2.有序排列<br>时间复杂度$O(logn)$</p>
+<h4 id="分块查找-索引顺序表查找"><a href="#分块查找-索引顺序表查找" class="headerlink" title="分块查找(索引顺序表查找)"></a>分块查找(索引顺序表查找)</h4><p>基本思路：对顺序表进行分块查找需要额外建立一个索引表，表中的每一项对应线性表中的一块，每个索引项都由键值分量和链值分量组成，键值分量存放对应快的最大关键字，链值分量存放指向本地第一个元素和最后一个元素的指针。</p>
+<h3 id="二叉排序树与平衡二叉树"><a href="#二叉排序树与平衡二叉树" class="headerlink" title="二叉排序树与平衡二叉树"></a>二叉排序树与平衡二叉树</h3><h4 id="二叉排序树"><a href="#二叉排序树" class="headerlink" title="二叉排序树"></a>二叉排序树</h4><h5 id="二叉排序树（BST）的定义和存储结构"><a href="#二叉排序树（BST）的定义和存储结构" class="headerlink" title="二叉排序树（BST）的定义和存储结构"></a>二叉排序树（BST）的定义和存储结构</h5><p>二叉排序树或者是空树，或者是满足一下性质的二叉树：<br>1）若他的左子树不为空，则左子树上的关键字的值均小于根关键字的值<br>2）若他的右子树不空，则右子树上所有关键字的值均大于根关键字的值<br>3）左右子树有格式一棵二叉排序树</p>
+<p>通常采用二叉链表进行存储，其结点类型定义与一般的二叉树类似</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">typedef struct BTNode&#123;</span><br><span class="line">    int key;</span><br><span class="line">    struct BTNode *lchild;</span><br><span class="line">    struct BTNode *rchild;</span><br><span class="line">&#125;BTNode;</span><br></pre></td></tr></table></figure>
+<h5 id="二叉排序树的基本算法"><a href="#二叉排序树的基本算法" class="headerlink" title="二叉排序树的基本算法"></a>二叉排序树的基本算法</h5><p>在二元排序树b中查找x的过程为：</p>
+<p> 1.若b是空树，则搜索失败，否则：<br> 2.若x等于b的根节点的数据域之值，则查找成功；否则：<br> 3.若x小于b的根节点的数据域之值，则搜索左子树；否则：<br> 4.查找右子树。</p>
+<p>在二叉排序树中删去一个结点，分三种情况讨论：</p>
+<p> 1.若*p结点为叶子结点，即PL(左子树)和PR(右子树)均为空树。由于删去叶子结点不破坏整棵树的结构，则只需修改其双亲结点的指针即可。</p>
+<p> 2.若p结点只有左子树PL或右子树PR，此时只要令PL或PR直接成为其双亲结点f的左子树（当p是左子树）或右子树（当p是右子树）即可，作此修改也不破坏二叉排序树的特性。</p>
+<p> 3.若p结点的左子树和右子树均不空。在删去p之后，为保持其它元素之间的相对位置不变，可按中序遍历保持有序进行调整。比较好的做法是，找到p的直接前驱（或直接后继）s，用s来替换结点p，然后再删除结点s。<br> <img src="http://imageqiniu.8hfq.com/15335474068426.jpg" alt=""></p>
+<h5 id="二叉排序树的性能介绍"><a href="#二叉排序树的性能介绍" class="headerlink" title="二叉排序树的性能介绍"></a>二叉排序树的性能介绍</h5><p>每个结点的Ci为该结点的层次数。最好的情况是二叉排序树的形态和折半查找的判定树相同，其平均查找长度和$logn$成正比$（O(log2(n))）$。最坏情况下，当先后插入的关键字有序时，构成的二叉排序树为一棵斜树，树的深度为n，其平均查找长度为$(n + 1) / 2$。也就是时间复杂度为$O(n)$，等同于顺序查找。因此，如果希望对一个集合按二叉排序树查找，最好是把它构建成一棵平衡的二叉排序树（平衡二叉树）。</p>
+<h4 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h4><p>二叉查找树不是严格的O(logN)，当有很多数据灌到我的树中时，我肯定会希望最好是以“完全二叉树”的形式展现，这样我才能做到“查找”是严格的O(logN)</p>
+<h5 id="平衡二叉树（AVL）定义"><a href="#平衡二叉树（AVL）定义" class="headerlink" title="平衡二叉树（AVL）定义"></a>平衡二叉树（AVL）定义</h5><p>父节点的左子树和右子树的高度之差不能大于1，也就是说不能高过1层，否则该树就失衡了，此时就要旋转节点，在<br>编码时，我们可以记录当前节点的高度，比如空节点是-1，叶子节点是0，非叶子节点的height往根节点递增，比如在下图<br>中我们认为树的高度为h=2。<br><img src="http://imageqiniu.8hfq.com/15335477090178.jpg" alt=""></p>
+<h5 id="平衡调整"><a href="#平衡调整" class="headerlink" title="平衡调整"></a>平衡调整</h5><p>  Hash查找法,常见的Hash函数(直接定址法,随机数法),hash冲突的概念, 解决冲突的方法(开散列方法/拉链法,闭散列方法/开址定址法),二次聚集现象;</p>
 <p>BST树定义,性质,ADT及其实现,BST树查找,插入,删除算法;</p>
 <p>平衡树 (AVL) 的定义,性质,ADT及其实现,平衡树查找,插入算法,平衡因子的概念;</p>
 <p>优先队列与堆,堆的定义,堆的生成,调整算法;范围查询;</p>
