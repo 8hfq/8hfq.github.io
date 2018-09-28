@@ -86,10 +86,12 @@
 <meta property="og:site_name" content="八号风球的博客">
 <meta property="og:description" content="第二部分 计算机系统基础考试题型：问答、分析、编程 总分：40分 一 、处理器体系结构CPU中的时序电路ISA一个处理器支持的指令和指令的字节级编码称为他的指令集体系结构ISAISA在编译器编写者和处理器设计人员之间提供了一个概念抽象层CPU循序的指令集编码，并且顺序的执行指令，也就是先取出一条指令，等他执行完毕再开始下一条，然而，现代处理器的实际工作方式可能跟ISA隐含的计算模型大相径庭。通过同">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-28T07:59:28.305Z">
+<meta property="og:image" content="https://cloud.8hfq.com/img/20180928160328.png">
+<meta property="og:updated_time" content="2018-09-28T08:20:19.490Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机系统基础(961)">
 <meta name="twitter:description" content="第二部分 计算机系统基础考试题型：问答、分析、编程 总分：40分 一 、处理器体系结构CPU中的时序电路ISA一个处理器支持的指令和指令的字节级编码称为他的指令集体系结构ISAISA在编译器编写者和处理器设计人员之间提供了一个概念抽象层CPU循序的指令集编码，并且顺序的执行指令，也就是先取出一条指令，等他执行完毕再开始下一条，然而，现代处理器的实际工作方式可能跟ISA隐含的计算模型大相径庭。通过同">
+<meta name="twitter:image" content="https://cloud.8hfq.com/img/20180928160328.png">
 
 
 
@@ -399,7 +401,7 @@
 <p><strong>寄存器文件</strong> (通用寄存器组成的逻辑块) 有两个读端口，还有一个写端口。电路可以读两个程序寄存器的值，同时更新第三个寄存器的状态。每个端口都有一个地址输入，表明选择哪个程序寄存器。<br>虽然寄存器文件不是组合电路，因为它有内部存储。不过，从寄存器文件读数据就好像它是一个以地址为输入、数据为输出的一个组合逻辑块。</p>
 <p><strong>指令编码</strong> 指令集的一个重要性质就是字节编码必须有唯一的解释。任意一个字节序列要么是一个唯一的指令序列的编码，要么就不是一个合法的字节序列。因为每条指令的第一个字节有唯一的代码和功能组合，给定这个字节，我们就可以决定所有其他附加字节的长度和含义。<br>每条指令需要1——6个字节不等，这取决于需要哪些字段。每条指令的第一个字节表明指令的类型：高4位是代码部分(例：6为整数类操作指令)，低4位是功能部分(例：1为整数类中的减法指令) 61合起来即为sub指令。</p>
 <h3 id="单周期处理器的设计"><a href="#单周期处理器的设计" class="headerlink" title="单周期处理器的设计"></a>单周期处理器的设计</h3><p>首先要理解什么叫单周期CPU（与后面多周期CPU对比）单周期CPU指的是一条指令的执行在一个时钟周期内完成，然后开始下一条指令的执行，即一条指令用一个时钟周期完成。  </p>
-<p>处理一条指令的序列：<br><strong>取指(fetch)</strong> </p>
+<p>处理一条指令的序列：<br><strong>取指(IF)</strong><br>取值阶段从存储器读取指令字节，放到指令存储器(CPU中)中，地址为程序计数器(PC)的值。<br>它按顺序的方式计算当前指令的下一条指令的地址(即PC的值加上已取出指令的长度)<br><strong>译码(ID)</strong><br><strong>执行(EXE)</strong><br><strong>访存(MEM)</strong><br><strong>写回(WB)</strong><br><strong>更新PC(PC update)</strong><br><img src="https://cloud.8hfq.com/img/20180928160328.png" alt=""></p>
 <h3 id="流水线处理器的基本原理"><a href="#流水线处理器的基本原理" class="headerlink" title="流水线处理器的基本原理"></a>流水线处理器的基本原理</h3><h3 id="Data-Hazard的处理"><a href="#Data-Hazard的处理" class="headerlink" title="Data Hazard的处理"></a>Data Hazard的处理</h3><h3 id="流水线设计中的其他问题"><a href="#流水线设计中的其他问题" class="headerlink" title="流水线设计中的其他问题"></a>流水线设计中的其他问题</h3><h2 id="二、优化程序性能"><a href="#二、优化程序性能" class="headerlink" title="二、优化程序性能"></a>二、优化程序性能</h2><p>内容：优化程序性能、优化编译器的能力和局限性以及表示程序性能、特定体系结构或应用特性的性能优化、限制因素、确认和消除性能瓶颈</p>
 <h2 id="三、存储器结构及虚拟存储器"><a href="#三、存储器结构及虚拟存储器" class="headerlink" title="三、存储器结构及虚拟存储器"></a>三、存储器结构及虚拟存储器</h2><p>内容：局部性、存储器层级结构、计算机高速缓存器原理、高速缓存对性能的影响、地址空间、虚拟存储器、虚拟内存的管理、翻译和映射、TLB、动态存储器分配和垃圾收集</p>
 <h2 id="四、链接、进程及并发编程"><a href="#四、链接、进程及并发编程" class="headerlink" title="四、链接、进程及并发编程"></a>四、链接、进程及并发编程</h2><p>内容：静态链接、目标文件、符号和符号表、重定位和加载、动态链接库、异常和进程、进程控制和信号、进程间的通信、进程间信号量的控制、信号量，各种并发编程模式，共享变量和线程同步，其他并行问题</p>
