@@ -168,7 +168,7 @@
 <meta property="og:image" content="https://cloud.8hfq.com/img/15330917268661.jpg">
 <meta property="og:image" content="https://cloud.8hfq.com/img/15331914116919.jpg">
 <meta property="og:image" content="https://cloud.8hfq.com/img/15331914212521.jpg">
-<meta property="og:updated_time" content="2018-11-16T10:02:49.120Z">
+<meta property="og:updated_time" content="2018-11-16T10:15:16.065Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法(961)">
 <meta name="twitter:description" content="第一部分 数据结构与算法考试题型：问答、分析、编程总分：60分 一、栈（Stack）、队列（Queue）和向量（Vector）线性表的基本概念和实现线性表的存储结构有顺序存储和链式存储结构两种。前者被称为顺序表，后者被称为链表。 顺序表顺序表就是把线性表中所有的元素按照其逻辑顺序，依次存储到从指定的存储位置开始的一块连续的存储空间，这样线性表的第一个元素的存储位置就是指定的存储位置，第i+1个的存">
@@ -424,7 +424,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-11-16T18:02:49+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-16T18:15:16+08:00">
                 2018-11-16
               </time>
             
@@ -576,6 +576,9 @@
 <ol>
 <li>先序遍历非递归算法<blockquote>
 <p>出栈时判断是否有孩子，右孩子先入栈，左孩子后入栈，因为对左孩子的访问要先于右孩子</p>
+</blockquote>
+</li>
+</ol>
 <ul>
 <li>结点1入栈</li>
 <li>1出栈，输出结点1，并将1的左右孩子2，4入栈，右孩子先入栈，左孩子后入栈。因为对左孩子的访问要先于右孩子，后入栈的会先出栈访问</li>
@@ -585,9 +588,6 @@
 <li>4出栈，此时栈空，进入终态</li>
 <li>遍历顺序为1，2，3，4，5</li>
 </ul>
-</blockquote>
-</li>
-</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public List&lt;Integer&gt; preorderTraversal(TreeNode root)&#123;</span><br><span class="line">     List&lt;Integer&gt; resultList = new ArrayList&lt;&gt;();</span><br><span class="line">     Stack&lt;TreeNode&gt; treeNodeStack = new Stack&lt;&gt;();</span><br><span class="line">     if(root ==null)</span><br><span class="line">         return resultList;</span><br><span class="line">     treeNodeStack.push(root);</span><br><span class="line">     while (!treeNodeStack.isEmpty())&#123;</span><br><span class="line">         TreeNode tempNode = treeNodeStack.pop();</span><br><span class="line">         if (tempNode!=null)&#123;</span><br><span class="line">             resultList.add(tempNode.val);</span><br><span class="line">             treeNodeStack.push(tempNode.right);</span><br><span class="line">             treeNodeStack.push(tempNode.left);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     return resultList;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <ol start="2">
 <li>中序遍历非递归算法<blockquote>
