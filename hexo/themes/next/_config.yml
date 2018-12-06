@@ -277,7 +277,7 @@ custom_logo:
 # Available value:
 #    normal | night | night eighties | night blue | night bright
 # https://github.com/chriskempson/tomorrow-theme
-highlight_theme: normal
+highlight_theme: night eighties
 
 
 # ---------------------------------------------------------------
@@ -343,7 +343,6 @@ font:
 # MathJax Support
 mathjax:
   enable: true
-  per_page: false
   cdn: https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 # Han Support docs: https://hanzi.pro/
 han: false
@@ -360,7 +359,7 @@ han: false
 # Disqus
 disqus:
   enable: false
-  shortname:
+  shortname: blog.8hfq.com
   count: true
 
 # Hypercomments
@@ -530,9 +529,9 @@ rating:
 # Show number of visitors to each article.
 # You can visit https://leancloud.cn get AppID and AppKey.
 leancloud_visitors:
-  enable: false
-  app_id: #<app_id>
-  app_key: #<app_key>
+  enable: true
+  app_id: gNl0SzzXI8CbT70p4ke8FV8H-gzGzoHsz
+  app_key: NQQyPoHemOemglUU0YEt02So
 
 # Another tool to show number of visitors to each article.
 # visit https://console.firebase.google.com/u/0/ to get apiKey and projectId
@@ -693,7 +692,7 @@ pace: false
 pace_theme: pace-theme-minimal
 
 # Canvas-nest
-canvas_nest: false
+canvas_nest: true
 
 # three_waves
 three_waves: false
