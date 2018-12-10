@@ -79,9 +79,12 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
-  repo: git@github.com:8hfq/8hfq.github.io.git
-  branch: master
+  - type: git
+    repo: git@github.com:8hfq/8hfq.github.io.git
+    branch: master
+  - type: git
+    repo: git@git.dev.tencent.com:w510116949/8hfq.github.io.git
+    branch: master
 
 search:
   path: search.xml
@@ -91,7 +94,7 @@ search:
   
 math:
   engine: 'mathjax' # or 'katex'
-  mathjax:
+  mathjax: 
     # src: custom_mathjax_source
     config:
       # MathJax config
@@ -118,3 +121,7 @@ jsonContent:
       categories: false
       tags: true
 
+# Security
+##
+encrypt:
+    enable: true
