@@ -428,6 +428,33 @@
 <p><strong>更新PC(PC update) 程序计数器</strong><br>根据指令代码和分支标志，从前几步得出的信号值中，选出下一个PC的值。<br><img src="https://cloud.8hfq.com/img/20180928160328.png" alt=""></p>
 <h3 id="流水线处理器的基本原理"><a href="#流水线处理器的基本原理" class="headerlink" title="流水线处理器的基本原理"></a>流水线处理器的基本原理</h3><p>我们通过将执行每条指令所需的步骤组织成一个统一的流程，就可以用很少量的各种硬件单元以及一个时钟来控制计算的顺序，从而实现整个处理器。不过这样一来，控制逻辑就必须要在这些单元之间路由信号，并根据指令类型和分支条件产生适当的控制信号。（CPU内有三种总线：控制总线、地址总线、数据总线）</p>
 <h3 id="Data-Hazard的处理"><a href="#Data-Hazard的处理" class="headerlink" title="Data Hazard的处理"></a>Data Hazard的处理</h3><h3 id="流水线设计中的其他问题"><a href="#流水线设计中的其他问题" class="headerlink" title="流水线设计中的其他问题"></a>流水线设计中的其他问题</h3><h2 id="二、优化程序性能"><a href="#二、优化程序性能" class="headerlink" title="二、优化程序性能"></a>二、优化程序性能</h2><p>内容：优化程序性能、优化编译器的能力和局限性以及表示程序性能、特定体系结构或应用特性的性能优化、限制因素、确认和消除性能瓶颈</p>
+<h4 id="1-8-优化程序大法总结"><a href="#1-8-优化程序大法总结" class="headerlink" title="1.8 优化程序大法总结"></a>1.8 优化程序大法总结</h4><hr>
+<p>到目前为止，我们基本上上讲完了所有的优化程序性能的方法，套路如下：</p>
+<ol>
+<li><p>高级设计：选择适当的算法和数据结构，要提高警惕，避免渐近低效率；</p>
+</li>
+<li><p>基本编码原则：</p>
+</li>
+</ol>
+<ul>
+<li><p>消除连续的函数调用，有可能的时候将计算移动到循环体外；</p>
+</li>
+<li><p>消除不必要的存储器引用，引入临时变量保存中间值。</p>
+</li>
+</ul>
+<ol start="3">
+<li>低级优化：</li>
+</ol>
+<ul>
+<li><p>展开循环，降低开销；</p>
+</li>
+<li><p>提高并行，使用多个累积变量或者重新结合，用良好的风格重新条件操作。</p>
+</li>
+</ul>
+<p>在实际的优化程序的过程中，我们不可能像之前讲到的简单程序那样，快速的分析出一个程序片段的性能瓶颈，毕竟在真实的项目中源码的量相当大，这时候我们有必要运用一些软件来分析程序的性能瓶颈，Unix系统中有一个GPROF可以实现相关分析，在此不做讲解了。</p>
+<blockquote>
+<p>备注：（Amdahl定律）Gene Amdahl曾经发现过一个很有意思的现象，最后以Amdahl命名了这个定律，大意就是：当我们选择提高某个系统的效率的时候，被改进的这一部分效率，对整体的影响，在于被改进部分到底有多重要（听起来像废话）。我们来举个例子，加入一个软件的耗时分为Told＝（1+6+3）＝10我们将6这个部分的效率提高了3倍，变成了Tnew＝（1+2+3）＝6。整个系统的加速还是不大。这就是Amdahl定律要告诉我们的主要观点，要想获得整体性能的提升，我们必须要提高很大一部分系统的速度。单靠一个方面是不行的。</p>
+</blockquote>
 <h2 id="三、存储器结构及虚拟存储器"><a href="#三、存储器结构及虚拟存储器" class="headerlink" title="三、存储器结构及虚拟存储器"></a>三、存储器结构及虚拟存储器</h2><p>内容：局部性、存储器层级结构、计算机高速缓存器原理、高速缓存对性能的影响、地址空间、虚拟存储器、虚拟内存的管理、翻译和映射、TLB、动态存储器分配和垃圾收集</p>
 <h2 id="四、链接、进程及并发编程"><a href="#四、链接、进程及并发编程" class="headerlink" title="四、链接、进程及并发编程"></a>四、链接、进程及并发编程</h2><p>内容：静态链接、目标文件、符号和符号表、重定位和加载、动态链接库、异常和进程、进程控制和信号、进程间的通信、进程间信号量的控制、信号量，各种并发编程模式，共享变量和线程同步，其他并行问题</p>
 <h2 id="五、系统级I-O和网络编程"><a href="#五、系统级I-O和网络编程" class="headerlink" title="五、系统级I/O和网络编程"></a>五、系统级I/O和网络编程</h2><p>内容：I/O相关概念、文件及文件操作、共享文件、网络编程、客户端-服务器模型，套接字接口、HTTP请求，Web服务器</p>
@@ -624,7 +651,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第二部分-计算机系统基础"><span class="nav-number">1.</span> <span class="nav-text">第二部分 计算机系统基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-、处理器体系结构"><span class="nav-number">1.1.</span> <span class="nav-text">一 、处理器体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU中的时序电路"><span class="nav-number">1.1.1.</span> <span class="nav-text">CPU中的时序电路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ISA"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">ISA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU硬件简介"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">CPU硬件简介</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单周期处理器的设计"><span class="nav-number">1.1.2.</span> <span class="nav-text">单周期处理器的设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流水线处理器的基本原理"><span class="nav-number">1.1.3.</span> <span class="nav-text">流水线处理器的基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Hazard的处理"><span class="nav-number">1.1.4.</span> <span class="nav-text">Data Hazard的处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流水线设计中的其他问题"><span class="nav-number">1.1.5.</span> <span class="nav-text">流水线设计中的其他问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、优化程序性能"><span class="nav-number">1.2.</span> <span class="nav-text">二、优化程序性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、存储器结构及虚拟存储器"><span class="nav-number">1.3.</span> <span class="nav-text">三、存储器结构及虚拟存储器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、链接、进程及并发编程"><span class="nav-number">1.4.</span> <span class="nav-text">四、链接、进程及并发编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、系统级I-O和网络编程"><span class="nav-number">1.5.</span> <span class="nav-text">五、系统级I/O和网络编程</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第二部分-计算机系统基础"><span class="nav-number">1.</span> <span class="nav-text">第二部分 计算机系统基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-、处理器体系结构"><span class="nav-number">1.1.</span> <span class="nav-text">一 、处理器体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU中的时序电路"><span class="nav-number">1.1.1.</span> <span class="nav-text">CPU中的时序电路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ISA"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">ISA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU硬件简介"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">CPU硬件简介</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单周期处理器的设计"><span class="nav-number">1.1.2.</span> <span class="nav-text">单周期处理器的设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流水线处理器的基本原理"><span class="nav-number">1.1.3.</span> <span class="nav-text">流水线处理器的基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Hazard的处理"><span class="nav-number">1.1.4.</span> <span class="nav-text">Data Hazard的处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流水线设计中的其他问题"><span class="nav-number">1.1.5.</span> <span class="nav-text">流水线设计中的其他问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、优化程序性能"><span class="nav-number">1.2.</span> <span class="nav-text">二、优化程序性能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8-优化程序大法总结"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">1.8 优化程序大法总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、存储器结构及虚拟存储器"><span class="nav-number">1.3.</span> <span class="nav-text">三、存储器结构及虚拟存储器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、链接、进程及并发编程"><span class="nav-number">1.4.</span> <span class="nav-text">四、链接、进程及并发编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、系统级I-O和网络编程"><span class="nav-number">1.5.</span> <span class="nav-text">五、系统级I/O和网络编程</span></a></li></ol></li></ol></div>
             
 
           </div>
