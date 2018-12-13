@@ -88,7 +88,7 @@
 <meta property="og:description" content="第二部分 计算机系统基础考试题型：问答、分析、编程总分：40分 一 、处理器体系结构CPU中的时序电路ISA一个处理器支持的指令和指令的字节级编码称为他的指令集体系结构ISAISA在编译器编写者和处理器设计人员之间提供了一个概念抽象层CPU循序的指令集编码，并且顺序的执行指令，也就是先取出一条指令，等他执行完毕再开始下一条，然而，现代处理器的实际工作方式可能跟ISA隐含的计算模型大相径庭。通过同时">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://cloud.8hfq.com/img/20180928160328.png">
-<meta property="og:updated_time" content="2018-12-12T09:05:11.282Z">
+<meta property="og:updated_time" content="2018-12-12T09:23:22.520Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机系统基础(961)">
 <meta name="twitter:description" content="第二部分 计算机系统基础考试题型：问答、分析、编程总分：40分 一 、处理器体系结构CPU中的时序电路ISA一个处理器支持的指令和指令的字节级编码称为他的指令集体系结构ISAISA在编译器编写者和处理器设计人员之间提供了一个概念抽象层CPU循序的指令集编码，并且顺序的执行指令，也就是先取出一条指令，等他执行完毕再开始下一条，然而，现代处理器的实际工作方式可能跟ISA隐含的计算模型大相径庭。通过同时">
@@ -344,7 +344,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-12T17:05:11+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-12T17:23:22+08:00">
                 2018-12-12
               </time>
             
@@ -456,6 +456,63 @@
 <p>备注：（Amdahl定律）Gene Amdahl曾经发现过一个很有意思的现象，最后以Amdahl命名了这个定律，大意就是：当我们选择提高某个系统的效率的时候，被改进的这一部分效率，对整体的影响，在于被改进部分到底有多重要（听起来像废话）。我们来举个例子，加入一个软件的耗时分为Told＝（1+6+3）＝10我们将6这个部分的效率提高了3倍，变成了Tnew＝（1+2+3）＝6。整个系统的加速还是不大。这就是Amdahl定律要告诉我们的主要观点，要想获得整体性能的提升，我们必须要提高很大一部分系统的速度。单靠一个方面是不行的。</p>
 </blockquote>
 <h2 id="三、存储器结构及虚拟存储器"><a href="#三、存储器结构及虚拟存储器" class="headerlink" title="三、存储器结构及虚拟存储器"></a>三、存储器结构及虚拟存储器</h2><p>内容：局部性、存储器层级结构、计算机高速缓存器原理、高速缓存对性能的影响、地址空间、虚拟存储器、虚拟内存的管理、翻译和映射、TLB、动态存储器分配和垃圾收集</p>
+<h3 id="计算机存储系统"><a href="#计算机存储系统" class="headerlink" title="计算机存储系统"></a>计算机存储系统</h3><p>存储系统是指计算机中由存放程序和数据的各种存储设备、控制部件及管理信息调度的设备（硬件）和算法（软件）所组成的系统。</p>
+<p>计算机的<code>主存储器</code>不能同时满足存取速度快、存储容量大和成本低的要求，在计算机中必须有速度由慢到快、容量由大到小的多级层次存储器，以最优的控制调度算法和合理的成本，构成具有性能可接受的存储系统。</p>
+<h4 id="存储层次"><a href="#存储层次" class="headerlink" title="存储层次"></a>存储层次</h4><p><strong>设计存储器有三个重要因素：容量，存取时间和价格。</strong></p>
+<p>存取时间，亦指存储周期，从存储器中读一个或写一个字到存储器中所花的时间。</p>
+<p>这三个因素之间的关系如下：</p>
+<ul>
+<li>存取时间越快，每一个“位”的价格越高</li>
+<li>容量越大，每一个“位”的价格越低</li>
+<li>容量越大，存取速度越慢</li>
+</ul>
+<p>一般需求是较大的容量，每一“位”较低的价格，但是又为了满足性能要求(需要采用昂贵的容量较小，存储周期短的存储器)。于是使用存储器的层次结构来解决。实现了以下几个特性：</p>
+<ul>
+<li>每一个“位”的价格递减。</li>
+<li>容量递增。</li>
+<li>存取时间递增。</li>
+<li>处理器访问存储器的频率递减。</li>
+</ul>
+<blockquote>
+<p>设计思想：高性价比，低性能存储器访问频率比低性价比，高性能存储器低，作为它的后备(性价比，容量与价格)。</p>
+<p>命中，是指存取快速存储器操作。如果没有对快速存储器进行存取操作，就是不命中。 </p>
+</blockquote>
+<p>这个层次结构主要分为两级，第一级存放当前程序访问的“簇”；第二级存放所有指令和数据。</p>
+<blockquote>
+<p>“簇”，处理器的指令访存和数据访存呈现“簇”状。例如程序的迭代循环，就是一个小范围的指令集合；表或数组都是“一簇”数据。长时间后程序访问的“簇”会改变，但是短时间内不会改变。</p>
+</blockquote>
+<h4 id="存储系统层次结构"><a href="#存储系统层次结构" class="headerlink" title="存储系统层次结构"></a>存储系统层次结构</h4><p>在计算机系统中存储层次可分为高速缓冲存储器、主存储器、辅助存储器三级。</p>
+<p>高速缓冲存储器用来改善主存储器与中央处理器的速度匹配问题，实现内存和处理器的寄存器之间分段移动数据。</p>
+<blockquote>
+<p>寄存器，用于保存指令执行过程中临时存放的操作数和中间(或最终)的操作结果。速度最快，是整个存储系统层次的最顶层。</p>
+</blockquote>
+<p>内存通常是高速缓存的扩展，辅助存储器用于扩大存储空间。</p>
+<blockquote>
+<p>内存，高速缓冲存储器，处理器的寄存器都是易失性的；辅助存储器属于非易失性的。</p>
+</blockquote>
+<h4 id="高速缓冲存储器"><a href="#高速缓冲存储器" class="headerlink" title="高速缓冲存储器"></a>高速缓冲存储器</h4><h5 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h5><p>高速缓存实际上存储的是一部分内存数据副本。当处理器要从内存中读取一个字节或字时，首先检查内容是否存在高速缓存中。如果在，直接从高速缓存中读取；如果不在，首先从内存中读取一定数量的字节组到高速缓存中，然后通过高速缓冲传递给处理器。这样做的好处是，利用了访问局部性原理(从内存中获取的那块数据，可能含有后续处理器需要的数据)。</p>
+<p>这样一来，数据访问的速度适应CPU的处理速度，减少了处理器等待时间(处理器周期)。</p>
+<h5 id="设计因素"><a href="#设计因素" class="headerlink" title="设计因素"></a>设计因素</h5><p>设计高速缓存有以下几点需要考虑：</p>
+<ul>
+<li>高速缓存大小，越小，速度越快。</li>
+<li>块大小，高速缓存与内存间的数据交换单位。块越大，命中率越高。但是块变得更大时，会导致数据重复替换可能性提高。</li>
+<li>映射函数，确定块占据哪个高速缓存单元。其灵活性影响着替换算法的设计。</li>
+<li>替换算法，选择替换不久的将来被访问的可能性最小的快。被称作最近最少使用(LRU)算法。</li>
+<li>写策略，将修改的内容写回内存。写策略规定合适发生存储器写操作。</li>
+</ul>
+<p><strong>问题，为什么需要给高速缓存设计替换算法，而内存与外存数据交换不设计</strong></p>
+<p>内存大小远远大于高速缓存大小，所以数据替换频繁。这就需要通过替换算法来优化，减少替换次数。而内存与外存之间，传递的是当前程序访问的“簇”，短时间内不需要更新，对整个程序运行影响不是很大。</p>
+<h4 id="主存储器"><a href="#主存储器" class="headerlink" title="主存储器"></a>主存储器</h4><p>主存储器就是平常所说的内存，又称主存(Main memory)。他的作用是存放指令和数据，并能由中央处理器直接存取。而且一般采用DRAM技术制作。</p>
+<h4 id="外存储器"><a href="#外存储器" class="headerlink" title="外存储器"></a>外存储器</h4><p>外储存器是指除计算机内存及CPU缓存以外的储存器，此类储存器一般断电后仍然能保存数据(非易失性)。常见的外存储器有硬盘、软盘、光盘、U盘等。</p>
+<h3 id="虚拟存储器"><a href="#虚拟存储器" class="headerlink" title="虚拟存储器"></a>虚拟存储器</h3><p>虚拟存储器是硬件异常、硬件地址翻译、主存、磁盘文件和内核软件的完美交互，它为每个进程提供了一个大的、一致的和私有的地址空间。通过一个很清晰的机制，虚拟存储器提供了三个重要的能力：</p>
+<ol>
+<li><p><strong>它将主存看成是一个存储在磁盘上的地址空间的高速缓存，在主存中只保存活动区域，并根据需要在磁盘和主存之间来回传送数据，</strong>通过这种方式，它高效地使用了主存。</p>
+</li>
+<li><p><strong>它为每个进程提供了一致的地址空间</strong>，从而简化了存储器管理。</p>
+</li>
+<li><p><strong>它保护了每个进程的地址空间不被其他进程破坏</strong>。</p>
+</li>
+</ol>
 <h2 id="四、链接、进程及并发编程"><a href="#四、链接、进程及并发编程" class="headerlink" title="四、链接、进程及并发编程"></a>四、链接、进程及并发编程</h2><p>内容：静态链接、目标文件、符号和符号表、重定位和加载、动态链接库、异常和进程、进程控制和信号、进程间的通信、进程间信号量的控制、信号量，各种并发编程模式，共享变量和线程同步，其他并行问题</p>
 <h2 id="五、系统级I-O和网络编程"><a href="#五、系统级I-O和网络编程" class="headerlink" title="五、系统级I/O和网络编程"></a>五、系统级I/O和网络编程</h2><p>内容：I/O相关概念、文件及文件操作、共享文件、网络编程、客户端-服务器模型，套接字接口、HTTP请求，Web服务器</p>
 
@@ -651,7 +708,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第二部分-计算机系统基础"><span class="nav-number">1.</span> <span class="nav-text">第二部分 计算机系统基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-、处理器体系结构"><span class="nav-number">1.1.</span> <span class="nav-text">一 、处理器体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU中的时序电路"><span class="nav-number">1.1.1.</span> <span class="nav-text">CPU中的时序电路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ISA"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">ISA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU硬件简介"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">CPU硬件简介</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单周期处理器的设计"><span class="nav-number">1.1.2.</span> <span class="nav-text">单周期处理器的设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流水线处理器的基本原理"><span class="nav-number">1.1.3.</span> <span class="nav-text">流水线处理器的基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Hazard的处理"><span class="nav-number">1.1.4.</span> <span class="nav-text">Data Hazard的处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流水线设计中的其他问题"><span class="nav-number">1.1.5.</span> <span class="nav-text">流水线设计中的其他问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、优化程序性能"><span class="nav-number">1.2.</span> <span class="nav-text">二、优化程序性能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8-优化程序大法总结"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">1.8 优化程序大法总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、存储器结构及虚拟存储器"><span class="nav-number">1.3.</span> <span class="nav-text">三、存储器结构及虚拟存储器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、链接、进程及并发编程"><span class="nav-number">1.4.</span> <span class="nav-text">四、链接、进程及并发编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、系统级I-O和网络编程"><span class="nav-number">1.5.</span> <span class="nav-text">五、系统级I/O和网络编程</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第二部分-计算机系统基础"><span class="nav-number">1.</span> <span class="nav-text">第二部分 计算机系统基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-、处理器体系结构"><span class="nav-number">1.1.</span> <span class="nav-text">一 、处理器体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU中的时序电路"><span class="nav-number">1.1.1.</span> <span class="nav-text">CPU中的时序电路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ISA"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">ISA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU硬件简介"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">CPU硬件简介</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单周期处理器的设计"><span class="nav-number">1.1.2.</span> <span class="nav-text">单周期处理器的设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流水线处理器的基本原理"><span class="nav-number">1.1.3.</span> <span class="nav-text">流水线处理器的基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Hazard的处理"><span class="nav-number">1.1.4.</span> <span class="nav-text">Data Hazard的处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流水线设计中的其他问题"><span class="nav-number">1.1.5.</span> <span class="nav-text">流水线设计中的其他问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、优化程序性能"><span class="nav-number">1.2.</span> <span class="nav-text">二、优化程序性能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-8-优化程序大法总结"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">1.8 优化程序大法总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、存储器结构及虚拟存储器"><span class="nav-number">1.3.</span> <span class="nav-text">三、存储器结构及虚拟存储器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机存储系统"><span class="nav-number">1.3.1.</span> <span class="nav-text">计算机存储系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#存储层次"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">存储层次</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存储系统层次结构"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">存储系统层次结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#高速缓冲存储器"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">高速缓冲存储器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#原理"><span class="nav-number">1.3.1.3.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设计因素"><span class="nav-number">1.3.1.3.2.</span> <span class="nav-text">设计因素</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主存储器"><span class="nav-number">1.3.1.4.</span> <span class="nav-text">主存储器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#外存储器"><span class="nav-number">1.3.1.5.</span> <span class="nav-text">外存储器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟存储器"><span class="nav-number">1.3.2.</span> <span class="nav-text">虚拟存储器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、链接、进程及并发编程"><span class="nav-number">1.4.</span> <span class="nav-text">四、链接、进程及并发编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、系统级I-O和网络编程"><span class="nav-number">1.5.</span> <span class="nav-text">五、系统级I/O和网络编程</span></a></li></ol></li></ol></div>
             
 
           </div>
