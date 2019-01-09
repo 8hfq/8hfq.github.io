@@ -874,7 +874,7 @@
           owner: '8hfq',
           admin: ['8hfq'],
           id: location.pathname,
-          labels: 'gitalk',
+           labels: 'gitalk'.split(',').filter(l => l),
           perPage: 15,
           pagerDirection: 'last',
           createIssueManually: true,

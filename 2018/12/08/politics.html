@@ -828,7 +828,7 @@ U2FsdGVkX19qmiU5oVXd0Ig9xZu05IWBkQnmgmzMUa1Y+qCh/GlAZhzIPyyJpqhJdTCm7iAS3tWna8IL
           owner: '8hfq',
           admin: ['8hfq'],
           id: location.pathname,
-          labels: 'gitalk',
+           labels: 'gitalk'.split(',').filter(l => l),
           perPage: 15,
           pagerDirection: 'last',
           createIssueManually: true,
