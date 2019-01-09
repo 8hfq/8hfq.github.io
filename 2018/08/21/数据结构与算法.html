@@ -980,10 +980,7 @@
           
 
   
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODI4My8xNDgxMQ"></div>
-    </div>
-
+<div id="gitalk-container"></div>
   
 
 
@@ -1286,17 +1283,6 @@
 
 
   
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
-  
 
 
 
@@ -1307,6 +1293,33 @@
 
 
 
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '81c8bb2d28cb8e57b6d6',
+          clientSecret: '4b6ade3b2d047d6dc30212cf84b2f484c6ea746e',
+          repo: 'gitalk',
+          owner: '8hfq',
+          admin: ['8hfq'],
+          id: location.pathname,
+          labels: 'gitalk',
+          perPage: 15,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        })
+
+        gitalk.render('gitalk-container')           
+       </script>
+
+
+.gt-container a{border-bottom: none;}
 
 
   
