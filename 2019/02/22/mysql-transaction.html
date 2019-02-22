@@ -87,7 +87,7 @@
 <meta property="og:description" content="数据库事务的四个基本性质  原子性:事务中包含的所有操作要么全做，要么全不做 一致性:在事务开始以前，数据库处于一致性的状态，事务结束后，数据库也必须处于一致性状态。 隔离性:事务隔离性要求系统必须保证事务不受其他并发执行的事务的影响 持久性:一个事务一旦成功完成，它对数据库的改变必须是永久的，即便是在系统遇到故障的情况下也不会丢失。数据的重要性决定了事务持久性的重要性。   事务的四种隔离级别">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://image.cloud.8hfq.com/img/20190222145044.png">
-<meta property="og:updated_time" content="2019-02-22T07:34:03.932Z">
+<meta property="og:updated_time" content="2019-02-22T07:35:36.441Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL 事务的隔离级别与锁">
 <meta name="twitter:description" content="数据库事务的四个基本性质  原子性:事务中包含的所有操作要么全做，要么全不做 一致性:在事务开始以前，数据库处于一致性的状态，事务结束后，数据库也必须处于一致性状态。 隔离性:事务隔离性要求系统必须保证事务不受其他并发执行的事务的影响 持久性:一个事务一旦成功完成，它对数据库的改变必须是永久的，即便是在系统遇到故障的情况下也不会丢失。数据的重要性决定了事务持久性的重要性。   事务的四种隔离级别">
@@ -363,7 +363,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-22T15:34:03+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-02-22T15:35:36+08:00">
                 2019-02-22
               </time>
             
@@ -491,10 +491,12 @@
 <li>select * from table where ? for update;</li>
 <li>insert;</li>
 <li>update ;</li>
-<li>delete;<br>事务的隔离级别实际上都是定义了当前读的级别，MySQL为了减少锁处理（包括等待其它锁）的时间，提升并发能力，引入了快照读的概念，使得select不用加锁。而update、insert这些“当前读”，就需要另外的模块来解决了。<h3 id="写”当前读”"><a href="#写”当前读”" class="headerlink" title="写”当前读”"></a>写”当前读”</h3>事务的隔离级别中虽然只定义了读数据的要求，实际上这也可以说是写数据的要求。上文的“读”，实际是讲的快照读；而这里说的“写”就是当前读了。 为了解决当前读中的幻读问题，MySQL事务使用了Next-Key锁。 </li>
+<li>delete;</li>
 </ul>
 </li>
 </ul>
+<p>事务的隔离级别实际上都是定义了当前读的级别，MySQL为了减少锁处理（包括等待其它锁）的时间，提升并发能力，引入了快照读的概念，使得select不用加锁。而update、insert这些“当前读”，就需要另外的模块来解决了。</p>
+<h3 id="写”当前读”"><a href="#写”当前读”" class="headerlink" title="写”当前读”"></a>写”当前读”</h3><p> 事务的隔离级别中虽然只定义了读数据的要求，实际上这也可以说是写数据的要求。上文的“读”，实际是讲的快照读；而这里说的“写”就是当前读了。 为了解决当前读中的幻读问题，MySQL事务使用了Next-Key锁。 </p>
 <h4 id="Next-Key锁"><a href="#Next-Key锁" class="headerlink" title="Next-Key锁"></a>Next-Key锁</h4><p>Next-Key锁是行锁和GAP（间隙锁）的合并，行锁上文已经介绍了，接下来说下GAP间隙锁。<br>RR级别中，事务A在update后加锁，事务B无法插入新数据，这样事务A在update前后读的数据保持一致，避免了幻读。这个锁，就是Gap锁。</p>
 <p>行锁防止别的事务修改或删除，GAP锁防止别的事务新增，行锁和GAP锁结合形成的的Next-Key锁共同解决了RR级别在写数据时的幻读问题。</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://tech.meituan.com/2014/08/20/innodb-lock.html" target="_blank" rel="noopener">美团技术团队-Innodb中的事务隔离级别和锁的关系</a><br><a href="http://www.jikexueyuan.com/course/1524_2.html?ss=1" target="_blank" rel="noopener">极客学院-MySQL 事务的隔离级别与锁</a></p>
