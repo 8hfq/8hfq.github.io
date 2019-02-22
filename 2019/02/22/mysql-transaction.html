@@ -79,14 +79,19 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="https://blog.8hfq.com/tags/index.html">
+<meta name="description" content="数据库事务的四个基本性质  原子性:事务中包含的所有操作要么全做，要么全不做 一致性:在事务开始以前，数据库处于一致性的状态，事务结束后，数据库也必须处于一致性状态。 隔离性:事务隔离性要求系统必须保证事务不受其他并发执行的事务的影响 持久性:一个事务一旦成功完成，它对数据库的改变必须是永久的，即便是在系统遇到故障的情况下也不会丢失。数据的重要性决定了事务持久性的重要性。   事务的四种隔离级别">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL 事务的隔离级别与锁">
+<meta property="og:url" content="https://blog.8hfq.com/2019/02/22/mysql-transaction.html">
 <meta property="og:site_name" content="八号风球的博客">
+<meta property="og:description" content="数据库事务的四个基本性质  原子性:事务中包含的所有操作要么全做，要么全不做 一致性:在事务开始以前，数据库处于一致性的状态，事务结束后，数据库也必须处于一致性状态。 隔离性:事务隔离性要求系统必须保证事务不受其他并发执行的事务的影响 持久性:一个事务一旦成功完成，它对数据库的改变必须是永久的，即便是在系统遇到故障的情况下也不会丢失。数据的重要性决定了事务持久性的重要性。   事务的四种隔离级别">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-23T09:10:41.000Z">
+<meta property="og:image" content="https://image.cloud.8hfq.com/img/20190222145044.png">
+<meta property="og:updated_time" content="2019-02-22T07:06:18.108Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
+<meta name="twitter:title" content="MySQL 事务的隔离级别与锁">
+<meta name="twitter:description" content="数据库事务的四个基本性质  原子性:事务中包含的所有操作要么全做，要么全不做 一致性:在事务开始以前，数据库处于一致性的状态，事务结束后，数据库也必须处于一致性状态。 隔离性:事务隔离性要求系统必须保证事务不受其他并发执行的事务的影响 持久性:一个事务一旦成功完成，它对数据库的改变必须是永久的，即便是在系统遇到故障的情况下也不会丢失。数据的重要性决定了事务持久性的重要性。   事务的四种隔离级别">
+<meta name="twitter:image" content="https://image.cloud.8hfq.com/img/20190222145044.png">
 
 
 
@@ -116,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="https://blog.8hfq.com/tags/"/>
+  <link rel="canonical" href="https://blog.8hfq.com/2019/02/22/mysql-transaction.html"/>
 
 
 
 
 
-  <title>tags | 八号风球的博客</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>MySQL 事务的隔离级别与锁 | 八号风球的博客</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -301,40 +306,236 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://blog.8hfq.com/2019/02/22/mysql-transaction.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="E.Wind">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="八号风球的博客">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">tags</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                目前共计 5 个标签
+          <h1 class="post-title" itemprop="name headline">MySQL 事务的隔离级别与锁</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T14:42:53+08:00">
+                2019-02-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-02-22T15:06:18+08:00">
+                2019-02-22
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/02/22/mysql-transaction.html" class="leancloud_visitors" data-flag-title="MySQL 事务的隔离级别与锁">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  858 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2 分钟
+                </span>
+              
             </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/961/" style="font-size: 30px; color: #111">961</a> <a href="/tags/cdh/" style="font-size: 12px; color: #ccc">cdh</a> <a href="/tags/kylin/" style="font-size: 12px; color: #ccc">kylin</a> <a href="/tags/信息系统/" style="font-size: 21px; color: #6f6f6f">信息系统</a> <a href="/tags/设计模式/" style="font-size: 12px; color: #ccc">设计模式</a>
-            </div>
-          </div>
-        
-      </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <blockquote>
+<p>数据库事务的四个基本性质</p>
+<ol>
+<li>原子性:事务中包含的所有操作要么全做，要么全不做</li>
+<li>一致性:在事务开始以前，数据库处于一致性的状态，事务结束后，数据库也必须处于一致性状态。</li>
+<li>隔离性:事务隔离性要求系统必须保证事务不受其他并发执行的事务的影响</li>
+<li>持久性:一个事务一旦成功完成，它对数据库的改变必须是永久的，即便是在系统遇到故障的情况下也不会丢失。数据的重要性决定了事务持久性的重要性。</li>
+</ol>
+</blockquote>
+<h2 id="事务的四种隔离级别"><a href="#事务的四种隔离级别" class="headerlink" title="事务的四种隔离级别"></a>事务的四种隔离级别</h2><p>在数据库操作中，为了有效保证并发读取数据的正确性，提出的事务隔离级别。我们的数据库锁，也是为了构建这些隔离级别存在的。<br><img src="https://image.cloud.8hfq.com/img/20190222145044.png" alt=""></p>
+<ol>
+<li>未提交读(Read Uncommitted)：允许脏读，也就是可能读取到其他会话中<strong>未提交</strong>事务修改的数据</li>
+<li>提交读(Read Committed)：只能读取到<strong>已经提交</strong>的数据。Oracle等多数数据库默认都是该级别 (不重复读)</li>
+<li>可重复读(Repeated Read)：可重复读。在同一个事务内的查询都是事务开始时刻一致的，InnoDB默认级别。在SQL标准中，该隔离级别消除了不可重复读，但是还存在幻象读</li>
+<li>串行读(序列化读 Serializable)：完全串行化的读，每次读都需要获得表级共享锁，读写相互都会阻塞</li>
+</ol>
+<ul>
+<li>幻读(Phantom Read):一个事务对一个表进行了表中数据全部修改，与此同时另一个事务向表中插入一行新数据，那么就会发生操作第一个事务的用户发现表中还有没有修改的数据行，就好象发生了幻觉一样。（由 insert引起）</li>
+<li>不可重复读（NonRepeatable Read）:在一个事务内，多次读同一数据。在这个事务还没有结束时，另外一个事务也访问该同一数据。那么，在第一个事务中的两次读数据之间，由于第二个事务的修改，那么第一个事务两次读到的的数据可能是不一样的。这样就发生了在一个事务内两次读到的数据是不一样的，因此称为是不可重复读。（update 和 delete 引起）</li>
+<li>脏读(Drity Read):某个事务已更新一份数据，另一个事务在此时读取了同一份数据，由于某些原因，前一个RollBack了操作，则后一个事务所读取的数据就会是不正确的。</li>
+</ul>
+<h2 id="MySQL中锁的种类"><a href="#MySQL中锁的种类" class="headerlink" title="MySQL中锁的种类"></a>MySQL中锁的种类</h2><p>MySQL中锁的种类很多，有常见的表锁和行锁，也有新加入的Metadata Lock等等</p>
+<ul>
+<li>表锁是对一整张表加锁，虽然可分为读锁和写锁，但毕竟是锁住整张表，会导致并发能力下降，一般是做ddl处理时使用。</li>
+<li>行锁则是锁住数据行，这种加锁方法比较复杂，但是由于只锁住有限的数据，对于其它数据不加限制，所以并发能力强，MySQL一般都是用行锁来处理并发事务。</li>
+</ul>
+<h3 id="Read-Committed"><a href="#Read-Committed" class="headerlink" title="Read Committed"></a>Read Committed</h3><p>在RC级别中，数据的读取都是不加锁的，但是数据的写入、修改和删除是需要加锁的。</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    E.Wind
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://blog.8hfq.com/2019/02/22/mysql-transaction.html" title="MySQL 事务的隔离级别与锁">https://blog.8hfq.com/2019/02/22/mysql-transaction.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/14/design-mode.html" rel="next" title="设计模式初探">
+                <i class="fa fa-chevron-left"></i> 设计模式初探
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -343,6 +544,12 @@
 
 
           
+
+  
+<div id="gitalk-container"></div>
+  
+
+
 
         </div>
         
@@ -363,8 +570,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -438,6 +654,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的四种隔离级别"><span class="nav-number">1.</span> <span class="nav-text">事务的四种隔离级别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL中锁的种类"><span class="nav-number">2.</span> <span class="nav-text">MySQL中锁的种类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Read-Committed"><span class="nav-number">2.1.</span> <span class="nav-text">Read Committed</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -628,6 +860,29 @@
 
 
 
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '81c8bb2d28cb8e57b6d6',
+          clientSecret: '4b6ade3b2d047d6dc30212cf84b2f484c6ea746e',
+          repo: 'gitalk',
+          owner: '8hfq',
+          admin: ['8hfq'],
+          id: location.pathname,
+           labels: 'gitalk'.split(',').filter(l => l),
+          perPage: 15,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        })
+
+        gitalk.render('gitalk-container')           
+       </script>
 
 
 

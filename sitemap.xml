@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.8hfq.com/2019/02/22/mysql-transaction.html</loc>
+    
+    <lastmod>2019-02-22T07:06:18.108Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.8hfq.com/2019/02/14/design-mode.html</loc>
+    
+    <lastmod>2019-02-22T06:59:39.357Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.8hfq.com/photos/index.html</loc>
     
-    <lastmod>2019-01-11T09:52:53.525Z</lastmod>
+    <lastmod>2019-01-11T09:59:18.333Z</lastmod>
     
   </url>
   
