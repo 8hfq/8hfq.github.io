@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.8hfq.com/2019/03/01/kubernetes-dashboard.html</loc>
+    
+    <lastmod>2019-03-01T02:02:30.863Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.8hfq.com/2019/02/22/mysql-transaction.html</loc>
     
     <lastmod>2019-02-22T07:35:36.441Z</lastmod>
