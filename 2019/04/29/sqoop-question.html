@@ -88,7 +88,7 @@
 <meta property="og:description" content="sqoop脚本同步Mysql数据到HiveSqoop数据数据转换工具：http://sqoop.apache.org/docs/1.4.6/SqoopUserGuide.html#_introduction 全量同步1234567891011121314151617181920212223242526272829303132import--connect              //链接jdbc">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://image.cloud.8hfq.com/img/20190429141250.png">
-<meta property="og:updated_time" content="2019-04-29T06:14:35.527Z">
+<meta property="og:updated_time" content="2019-04-29T06:14:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sqoop常见问题">
 <meta name="twitter:description" content="sqoop脚本同步Mysql数据到HiveSqoop数据数据转换工具：http://sqoop.apache.org/docs/1.4.6/SqoopUserGuide.html#_introduction 全量同步1234567891011121314151617181920212223242526272829303132import--connect              //链接jdbc">
@@ -463,7 +463,7 @@
 
       
         <h2 id="sqoop脚本"><a href="#sqoop脚本" class="headerlink" title="sqoop脚本"></a>sqoop脚本</h2><h3 id="同步Mysql数据到Hive"><a href="#同步Mysql数据到Hive" class="headerlink" title="同步Mysql数据到Hive"></a>同步Mysql数据到Hive</h3><p>Sqoop数据数据转换工具：<a href="http://sqoop.apache.org/docs/1.4.6/SqoopUserGuide.html#_introduction" target="_blank" rel="noopener">http://sqoop.apache.org/docs/1.4.6/SqoopUserGuide.html#_introduction</a></p>
-<h3 id="全量同步"><a href="#全量同步" class="headerlink" title="全量同步"></a>全量同步</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">import</span><br><span class="line">--connect              //链接jdbc</span><br><span class="line"><span class="meta">$</span>&#123;jdbcUrl&#125;</span><br><span class="line">--connection-param-file</span><br><span class="line">jdbc_options.txt             //配置文件</span><br><span class="line">--username</span><br><span class="line"><span class="meta">$</span>&#123;jdbcUserName&#125;        //用户密码等</span><br><span class="line">--password-file</span><br><span class="line"></span><br><span class="line">--query      //sql mysql转入hive的sql  其中有清洗等过程</span><br><span class="line"></span><br><span class="line">--boundary-query                  //选取切割的最大最小值</span><br><span class="line">select min(t_case_state_log.id), max(t_case_state_log.id) from t_case_state_log</span><br><span class="line">--split-by        //用哪个字段切割</span><br><span class="line">t_case_state_log.id</span><br><span class="line">-m    //region几份</span><br><span class="line">4</span><br><span class="line">--null-non-string</span><br><span class="line">'0'</span><br><span class="line">--fetch-size    //limit一次拿多少条</span><br><span class="line">100</span><br><span class="line">--delete-target-dir</span><br><span class="line">--target-dir     //放在那个文件夹</span><br><span class="line">/etl/dzj/full_case_process_fact</span><br><span class="line">--fields-terminated-by   //用什么字段来分割</span><br><span class="line">'\"'</span><br><span class="line">--hive-drop-import-delims</span><br><span class="line">--hive-overwrite</span><br><span class="line">--hive-import</span><br><span class="line">--hive-table         //表名</span><br><span class="line"></span><br><span class="line">dzj.dzj_case_process_fact</span><br></pre></td></tr></table></figure>
+<h3 id="全量同步"><a href="#全量同步" class="headerlink" title="全量同步"></a>全量同步</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">import</span><br><span class="line">--connect              //链接jdbc</span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;jdbcUrl&#125;</span></span><br><span class="line">--connection-param-file</span><br><span class="line">jdbc_options.txt             //配置文件</span><br><span class="line">--username</span><br><span class="line"><span class="meta">$</span><span class="bash">&#123;jdbcUserName&#125;        //用户密码等</span></span><br><span class="line">--password-file</span><br><span class="line"></span><br><span class="line">--query      //sql mysql转入hive的sql  其中有清洗等过程</span><br><span class="line"></span><br><span class="line">--boundary-query                  //选取切割的最大最小值</span><br><span class="line">select min(t_case_state_log.id), max(t_case_state_log.id) from t_case_state_log</span><br><span class="line">--split-by        //用哪个字段切割</span><br><span class="line">t_case_state_log.id</span><br><span class="line">-m    //region几份</span><br><span class="line">4</span><br><span class="line">--null-non-string</span><br><span class="line">'0'</span><br><span class="line">--fetch-size    //limit一次拿多少条</span><br><span class="line">100</span><br><span class="line">--delete-target-dir</span><br><span class="line">--target-dir     //放在那个文件夹</span><br><span class="line">/etl/dzj/full_case_process_fact</span><br><span class="line">--fields-terminated-by   //用什么字段来分割</span><br><span class="line">'\"'</span><br><span class="line">--hive-drop-import-delims</span><br><span class="line">--hive-overwrite</span><br><span class="line">--hive-import</span><br><span class="line">--hive-table         //表名</span><br><span class="line"></span><br><span class="line">dzj.dzj_case_process_fact</span><br></pre></td></tr></table></figure>
 <h3 id="增量同步"><a href="#增量同步" class="headerlink" title="增量同步"></a>增量同步</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--check-column   //什么字段来增量</span><br><span class="line">id</span><br><span class="line">--incremental  //增量m模式</span><br><span class="line">append</span><br><span class="line">--last-value //最后取得一次值 （自动的）</span><br><span class="line">28525</span><br><span class="line">--merge-key</span><br><span class="line">id</span><br></pre></td></tr></table></figure>
 <p>两种增量同步模式：append，lastmodified<br>append适合于数据只有新增的情况，lastmodified适合于数据有更新的情况</p>
 <h3 id="Sqoop-job"><a href="#Sqoop-job" class="headerlink" title="Sqoop job"></a>Sqoop job</h3><p>job<br>–create<br>job_inc_syn_mysql_case_disease_fact</p>
@@ -544,6 +544,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/21/hql-Function.html" rel="prev" title="Hql基础及优化">
+                Hql基础及优化 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -626,7 +630,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1374,7 +1378,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 
