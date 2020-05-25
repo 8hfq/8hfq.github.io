@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[study_bigdata_dev]]></title>
+    <title><![CDATA[大数据开发学习总结]]></title>
     <url>%2F2020%2F05%2F25%2Fstudy-bigdata-dev.html</url>
     <content type="text"></content>
+      <categories>
+        <category>study</category>
+      </categories>
+      <tags>
+        <tag>bigdata</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[Hql基础及优化]]></title>
